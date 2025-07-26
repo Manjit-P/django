@@ -1,0 +1,9 @@
+{% extends "home.html" %}
+{% block content%}
+<h2>Log In</h2>
+<form action="" method="post">{% csrf_token%}
+{{form}}
+<input type="submit" value="Log In">
+</form>
+<a href="{% url 'signup' %}"><button>Sign up</button></a>
+{% endblock content%}

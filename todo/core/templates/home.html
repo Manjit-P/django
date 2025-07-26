@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+<p>{{user.username}}</p>
+<ol>{% for task in task_list %}
+    <li><b>Name:</b> <a href="{{task.get_absolute_url}}">{{task.name}}</a> <br>
+    <b>Created:</b>{{task.created_on}}<b>           Due:</b>{{task.due}} <br>
+    <b>Task By:</b>{{ task.user.username }}
+    </li>{% endfor %}
+</ol>
+<form action="{% url 'logout' %}" method="post">{% csrf_token %}
+    <input type="submit" value="Log Out">
+</form>
+{% else %}
+<a href="{% url 'login' %}">Login</a>
+<a href="{% url 'signup' %}">Signup</a>
+{% endif %}
+{% endblock content %}

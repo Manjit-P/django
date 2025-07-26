@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}    
+<p>
+    {% if not task.completed and task.due == task.now %}
+    <b>Name:</b> {{task.name}}<br>
+    <b>{{task.get_category_display}}</b> <br>
+    <b>Description:</b>{{task.description}}<br>
+    <b>created:</b>{{task.created_on}}          <b>due:</b>{{task.due}} <br>
+    <div class="late" style="color: red;font-weight: bolder;">!!!Your due date is today!!!
+    </div><br>
+    {% else %}
+    <b>Name:</b> {{task.name}}<br>
+    <b>Description:</b>{{task.description}}<br>
+    <b>created:</b>{{task.created_on}}          <b>due:</b>{{task.due}} <br>
+    Your due date is in <b>{{task.due}}</b> <br>
+</p>
+    {% endif %}
+<a href="{% url 'update' task.slug %}">Update</a>|
+<a href="{% url 'delete' task.slug %}">Delete</a>
+{% endblock content %}
