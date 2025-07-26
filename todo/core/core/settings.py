@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -47,11 +46,11 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE = [    
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'corsheaders.middlware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -64,7 +63,8 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
 ]
 CSRF_TRUSTED_ORIGINS = [
-    'localhost:3000',
+    'http://localhost:3000',
+    'http://localhost:8000',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -84,7 +84,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'core.wsgi.application'
+WSGI_APPLICATION = "core.wsgi.application"
 
 
 # Database
@@ -92,8 +92,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'todo_db',
+        'USER': 'zenrich',
+        'PASSWORD': '123',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -136,7 +140,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = [
-    "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    "whitenoise.storage.CompressedManifestStaticFilesStorage",
 ]
 
 # Default primary key field type
