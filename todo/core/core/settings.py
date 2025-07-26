@@ -95,7 +95,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': env.dj_db_url("DATABASE_URL")}
+    'default': env.dj_db_url("DATABASE_URL", default = "postgresql://todo_db_gxq6_user:9kcCcs58OERxBAzwy3yUjyWXcw1aHRVV@dpg-d22f9qbe5dus739jit6g-a/todo_db_gxq6")}
 
 
 # Password validation
